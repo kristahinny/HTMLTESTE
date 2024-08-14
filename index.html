@@ -5,86 +5,126 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Convite para Jantar</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .convite {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            position: relative;
-        }
-        .convite h1 {
-            color: #333;
-        }
-        .convite p {
-            color: #666;
-        }
-        .convite button {
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 5px;
-        }
-        .convite button:hover {
-            background-color: #0056b3;
-        }
-        .emojis {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 3rem;
-            display: none;
-        }
-        .food-options {
-            margin-top: 20px;
-            text-align: left;
-        }
-        .food-options label {
-            display: block;
-            margin: 10px 0;
-        }
+       body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f7fa; /* Azul claro */
+    background-image: url("4.webp");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.convite {
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo branco com transparência */
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+    width: 400px; /* Aumentado o tamanho */
+}
+
+.convite h1 {
+    color: #23262b; /* Azul claro mais escuro */
+    font-size: 2.5rem; /* Aumentado o tamanho do título */
+    margin-bottom: 20px;
+}
+
+.convite p {
+    color: #555;
+    font-size: 1.2rem; /* Aumentado o tamanho do texto */
+    margin-bottom: 10px;
+}
+
+.convite button {
+    background-color: #12151a; /* Azul padrão */
+    color: #fff;
+    border: none;
+    padding: 15px 30px; /* Aumentado o tamanho do botão */
+    border-radius: 10px; /* Bordas mais arredondadas */
+    cursor: pointer;
+    margin: 10px;
+    font-size: 1rem; /* Aumentado o tamanho do texto no botão */
+}
+
+.convite button:hover {
+    background-color: #23262b; /* Azul escuro ao passar o mouse */
+}
+
+.emojis {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem; /* Aumentado o tamanho dos emojis */
+    display: none;
+}
+
+.food-options {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.food-options h2 {
+    color:  #23262b;
+    font-size: 1.5rem; /* Aumentado o tamanho do subtítulo */
+    margin-bottom: 15px;
+}
+
+.food-options label {
+    display: block;
+    margin: 15px 0;
+    font-size: 1.2rem; /* Aumentado o tamanho das opções */
+    color: #333;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem; /* Aumentado o tamanho do campo de texto */
+}
+
     </style>
 </head>
 <body>
     <div class="convite">
-        <h1>vem jantar comigo e tomar um vinho!</h1>
+        <h1>Hj é dia de me amar!</h1>
         <p>Hoje</p>
         <p>Hora: 19:00</p>
         <p>Local: Minha casa</p>
+
+        <!-- Campo para Nome -->
+        <div>
+            <label for="nome">Digite seu nome:</label>
+            <input type="text" id="nome" placeholder="Seu nome" required>
+        </div>
 
         <!-- Opções de Cardápio -->
         <div class="food-options">
             <h2>Escolha seu prato:</h2>
             <label>
-                <input type="radio" name="food" value="Lasanha" onclick="mostrarEmoji('🍝')"> Lasanha
+                <input type="radio" name="food" value="Lasanha" onclick="selecionarPrato('Lasanha', '🍝')"> Lasanha
             </label>
             <label>
-                <input type="radio" name="food" value="Macarrão" onclick="mostrarEmoji('🍝')"> Macarrão
+                <input type="radio" name="food" value="Macarrão" onclick="selecionarPrato('Macarrão', '🍝')"> Macarrão
             </label>
             <label>
-                <input type="radio" name="food" value="Pizza" onclick="mostrarEmoji('🍕')"> Pizza
+                <input type="radio" name="food" value="Pizza" onclick="selecionarPrato('Pizza', '🍕')"> Pizza
             </label>
             <label>
-                <input type="radio" name="food" value="Arroz" onclick="mostrarEmoji('🍚')"> Arroz
+                <input type="radio" name="food" value="Arroz" onclick="selecionarPrato('Arroz', '🍚')"> Arroz
             </label>
             <label>
-                <input type="radio" name="food" value="Bife" onclick="mostrarEmoji('🥩')"> Bife
+                <input type="radio" name="food" value="Bife" onclick="selecionarPrato('Bife', '🥩')"> Bife
             </label>
             <label>
-                <input type="radio" name="food" value="Batata Frita" onclick="mostrarEmoji('🍟')"> Batata Frita
+                <input type="radio" name="food" value="Batata Frita" onclick="selecionarPrato('Batata Frita', '🍟')"> Batata Frita
             </label>
         </div>
 
@@ -109,26 +149,30 @@
         // Inicializar EmailJS com a Public Key
         emailjs.init("RYm6w8ULLYFC2sBqt");
 
-        function enviarResposta(resposta) {
-            // Alterar o emoji de acordo com a resposta
-            const emojiContainer = document.getElementById('emojiContainer');
-            if (resposta === 'Sim') {
-                emojiContainer.innerHTML = '😄'; // Emoji feliz
-            } else {
-                emojiContainer.innerHTML = '💩'; // Emoji de "bosta"
-            }
+        function selecionarPrato(prato, emoji) {
+            // Atualizar o campo oculto com o prato selecionado
+            document.getElementById('food').value = prato;
 
-            // Mostrar o emoji com animação
+            // Mostrar o emoji correspondente
+            const emojiContainer = document.getElementById('emojiContainer');
+            emojiContainer.innerHTML = emoji;
             emojiContainer.style.display = 'block';
             setTimeout(() => {
                 emojiContainer.style.display = 'none';
             }, 2000);
+        }
+
+        function enviarResposta(resposta) {
+            // Capturar o valor do nome
+            const nomePessoa = document.getElementById('nome').value;
 
             // Enviar o e-mail com a resposta
             const templateParams = {
                 email: document.getElementById('email').value,
+                nomePessoa: nomePessoa,  // Inclua o nome aqui
                 resposta: resposta,
-                food: document.getElementById('food').value || 'Não selecionado'
+                food: document.getElementById('food').value || 'Não selecionado',
+                respostaPersonalizada: '' // Este campo pode ser usado para uma mensagem personalizada, se necessário
             };
 
             emailjs.send('service_nmdkg6c', 'template_ezojouj', templateParams)
@@ -137,19 +181,6 @@
                 }, function(error) {
                     alert('Erro ao enviar resposta: ' + JSON.stringify(error));
                 });
-        }
-
-        function mostrarEmoji(emoji) {
-            // Atualizar o emoji com a seleção de comida
-            const emojiContainer = document.getElementById('emojiContainer');
-            emojiContainer.innerHTML = emoji;
-            emojiContainer.style.display = 'block';
-            setTimeout(() => {
-                emojiContainer.style.display = 'none';
-            }, 2000);
-
-            // Atualizar o valor da comida selecionada
-            document.getElementById('food').value = emoji;
         }
     </script>
 </body>
