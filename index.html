@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convite para Jantar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .convite {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .convite h1 {
+            color: #333;
+        }
+        .convite p {
+            color: #666;
+        }
+        .convite button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .convite button:hover {
+            background-color: #0056b3;
+        }
+        .menu {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .menu h2 {
+            color: #333;
+        }
+        .menu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .menu ul li {
+            color: #666;
+            margin: 5px 0;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .menu ul li:hover {
+            transform: scale(1.1);
+        }
+        .emoji {
+            font-size: 24px;
+            display: inline-block;
+            margin-left: 10px;
+            transition: opacity 0.3s, transform 0.3s;
+            opacity: 0;
+        }
+        .emoji.show {
+            opacity: 1;
+            transform: translateY(-10px);
+        }
+        .response-buttons {
+            margin-top: 20px;
+        }
+        .response-buttons button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+        .response-buttons button:nth-child(2) {
+            background-color: #dc3545;
+        }
+        .response-buttons button:hover {
+            opacity: 0.8;
+        }
+        .response-buttons button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <div class="convite">
+        <h1>Você está convidado para um Jantar!</h1>
+        <p>Data: 20 de Agosto de 2024</p>
+        <p>Hora: 19:00</p>
+        <p>Local: Minha casa</p>
+        <div class="menu">
+            <h2>Opções de Cardápio:</h2>
+            <ul>
+                <li onclick="showEmoji('lasanha')">Lasanha <span id="lasanha" class="emoji">🍝</span></li>
+                <li onclick="showEmoji('macarrao')">Macarrão <span id="macarrao" class="emoji">🍜</span></li>
+                <li onclick="showEmoji('pizza')">Pizza <span id="pizza" class="emoji">🍕</span></li>
+                <li onclick="showEmoji('arroz')">Arroz <span id="arroz" class="emoji">🍚</span></li>
+                <li onclick="showEmoji('bife')">Bife <span id="bife" class="emoji">🥩</span></li>
+                <li onclick="showEmoji('batata')">Batata Frita <span id="batata" class="emoji">🍟</span></li>
+            </ul>
+        </div>
+        <div class="response-buttons">
+            <button onclick="showResponse('sim')">Sim</button>
+            <button onclick="showResponse('nao')">Não</button>
+        </div>
+        <div id="response" class="emoji"></div>
+    </div>
+    <script>
+        function showEmoji(id) {
+            var emoji = document.getElementById(id);
+            emoji.classList.add('show');
+            setTimeout(function() {
+                emoji.classList.remove('show');
+            }, 1500); // Emojis will fade out after 1.5 seconds
+        }
+
+        function showResponse(response) {
+            var responseEmoji = document.getElementById('response');
+            if (response === 'sim') {
+                responseEmoji.textContent = '😊'; // Carinha feliz
+                responseEmoji.classList.add('show');
+            } else if (response === 'nao') {
+                responseEmoji.textContent = '😢'; // Carinha triste
+                responseEmoji.classList.add('show');
+            }
+            setTimeout(function() {
+                responseEmoji.classList.remove('show');
+            }, 1500); // Emojis will fade out after 1.5 seconds
+        }
+    </script>
+</body>
+</html>
