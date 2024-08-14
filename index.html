@@ -20,6 +20,7 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            position: relative;
         }
         .convite h1 {
             color: #333;
@@ -34,108 +35,121 @@
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
+            margin: 5px;
         }
         .convite button:hover {
             background-color: #0056b3;
         }
-        .menu {
+        .emojis {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            display: none;
+        }
+        .food-options {
             margin-top: 20px;
             text-align: left;
         }
-        .menu h2 {
-            color: #333;
-        }
-        .menu ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .menu ul li {
-            color: #666;
-            margin: 5px 0;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .menu ul li:hover {
-            transform: scale(1.1);
-        }
-        .emoji {
-            font-size: 24px;
-            display: inline-block;
-            margin-left: 10px;
-            transition: opacity 0.3s, transform 0.3s;
-            opacity: 0;
-        }
-        .emoji.show {
-            opacity: 1;
-            transform: translateY(-10px);
-        }
-        .response-buttons {
-            margin-top: 20px;
-        }
-        .response-buttons button {
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 0 10px;
-        }
-        .response-buttons button:nth-child(2) {
-            background-color: #dc3545;
-        }
-        .response-buttons button:hover {
-            opacity: 0.8;
-        }
-        .response-buttons button:active {
-            transform: scale(0.95);
+        .food-options label {
+            display: block;
+            margin: 10px 0;
         }
     </style>
 </head>
 <body>
     <div class="convite">
-        <h1>Você está convidado para um Jantar!</h1>
-        <p> hoje dia de me amar :)  </p>
+        <h1>vem jantar comigo e tomar um vinho!</h1>
+        <p>Hoje</p>
         <p>Hora: 19:00</p>
         <p>Local: Minha casa</p>
-        <div class="menu">
-            <h2>Opções de Cardápio:</h2>
-            <ul>
-                <li onclick="showEmoji('lasanha')">Lasanha <span id="lasanha" class="emoji">🍝</span></li>
-                <li onclick="showEmoji('macarrao')">Macarrão <span id="macarrao" class="emoji">🍜</span></li>
-                <li onclick="showEmoji('pizza')">Pizza <span id="pizza" class="emoji">🍕</span></li>
-                <li onclick="showEmoji('arroz')">Arroz <span id="arroz" class="emoji">🍚</span></li>
-                <li onclick="showEmoji('bife')">Bife <span id="bife" class="emoji">🥩</span></li>
-                <li onclick="showEmoji('batata')">Batata Frita <span id="batata" class="emoji">🍟</span></li>
-            </ul>
+
+        <!-- Opções de Cardápio -->
+        <div class="food-options">
+            <h2>Escolha seu prato:</h2>
+            <label>
+                <input type="radio" name="food" value="Lasanha" onclick="mostrarEmoji('🍝')"> Lasanha
+            </label>
+            <label>
+                <input type="radio" name="food" value="Macarrão" onclick="mostrarEmoji('🍝')"> Macarrão
+            </label>
+            <label>
+                <input type="radio" name="food" value="Pizza" onclick="mostrarEmoji('🍕')"> Pizza
+            </label>
+            <label>
+                <input type="radio" name="food" value="Arroz" onclick="mostrarEmoji('🍚')"> Arroz
+            </label>
+            <label>
+                <input type="radio" name="food" value="Bife" onclick="mostrarEmoji('🥩')"> Bife
+            </label>
+            <label>
+                <input type="radio" name="food" value="Batata Frita" onclick="mostrarEmoji('🍟')"> Batata Frita
+            </label>
         </div>
-        <div class="response-buttons">
-            <button onclick="showResponse('sim')">Sim</button>
-            <button onclick="showResponse('nao')">Não</button>
-        </div>
-        <div id="response" class="emoji"></div>
+
+        <!-- Formulário para envio da resposta -->
+        <form id="responseForm">
+            <input type="hidden" name="resposta" id="resposta">
+            <input type="hidden" name="food" id="food">
+            <input type="hidden" name="email" id="email" value="krisrosa123@gmail.com"> <!-- Seu e-mail aqui -->
+            <div>
+                <button type="button" onclick="enviarResposta('Sim')">Sim</button>
+                <button type="button" onclick="enviarResposta('Não')">Não</button>
+            </div>
+        </form>
+
+        <!-- Emojis -->
+        <div id="emojiContainer" class="emojis">😄</div>
     </div>
-    <script>
-        function showEmoji(id) {
-            var emoji = document.getElementById(id);
-            emoji.classList.add('show');
-            setTimeout(function() {
-                emoji.classList.remove('show');
-            }, 1500); // Emojis will fade out after 1.5 seconds
+
+    <!-- Inclua o SDK do EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        // Inicializar EmailJS com a Public Key
+        emailjs.init("RYm6w8ULLYFC2sBqt");
+
+        function enviarResposta(resposta) {
+            // Alterar o emoji de acordo com a resposta
+            const emojiContainer = document.getElementById('emojiContainer');
+            if (resposta === 'Sim') {
+                emojiContainer.innerHTML = '😄'; // Emoji feliz
+            } else {
+                emojiContainer.innerHTML = '💩'; // Emoji de "bosta"
+            }
+
+            // Mostrar o emoji com animação
+            emojiContainer.style.display = 'block';
+            setTimeout(() => {
+                emojiContainer.style.display = 'none';
+            }, 2000);
+
+            // Enviar o e-mail com a resposta
+            const templateParams = {
+                email: document.getElementById('email').value,
+                resposta: resposta,
+                food: document.getElementById('food').value || 'Não selecionado'
+            };
+
+            emailjs.send('service_nmdkg6c', 'template_ezojouj', templateParams)
+                .then(function(response) {
+                    alert('Resposta enviada com sucesso!');
+                }, function(error) {
+                    alert('Erro ao enviar resposta: ' + JSON.stringify(error));
+                });
         }
 
-        function showResponse(response) {
-            var responseEmoji = document.getElementById('response');
-            if (response === 'sim') {
-                responseEmoji.textContent = '😊'; // Carinha feliz
-                responseEmoji.classList.add('show');
-            } else if (response === 'nao') {
-                responseEmoji.textContent = '😢'; // Carinha triste
-                responseEmoji.classList.add('show');
-            }
-            setTimeout(function() {
-                responseEmoji.classList.remove('show');
-            }, 1500); // Emojis will fade out after 1.5 seconds
+        function mostrarEmoji(emoji) {
+            // Atualizar o emoji com a seleção de comida
+            const emojiContainer = document.getElementById('emojiContainer');
+            emojiContainer.innerHTML = emoji;
+            emojiContainer.style.display = 'block';
+            setTimeout(() => {
+                emojiContainer.style.display = 'none';
+            }, 2000);
+
+            // Atualizar o valor da comida selecionada
+            document.getElementById('food').value = emoji;
         }
     </script>
 </body>
